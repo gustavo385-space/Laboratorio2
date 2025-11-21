@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Entrega de Medicamentos - Ministerio de Salud</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-content">
+                    <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                    <div>
+                        <h1>Sistema de Entrega de Medicamentos</h1>
+                        <p class="subtitle">Ministerio de Salud - Control de Enfermedades no Transmisibles</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <!-- Inventory Section -->
+                <div class="inventory-section">
+                    <h2 class="section-title">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                        Inventario de Medicamentos
+                    </h2>
+                    
+                    <div class="inventory-grid">
+                        <div class="inventory-card">
+                            <div class="inventory-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <div class="inventory-header">
+                                <h3>Medicamento 1</h3>
+                                <span class="inventory-badge" id="med1Status">Disponible</span>
+                            </div>
+                            <div class="inventory-stats">
+                                <div class="inventory-value" id="med1Stock">100</div>
+                                <div class="inventory-label">Unidades disponibles</div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="med1Progress" style="width: 100%"></div>
+                            </div>
+                            <div class="inventory-percentage" id="med1StockPercentage">100% en stock</div>
+                        </div>
+                        
+                        <div class="inventory-card">
+                            <div class="inventory-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <div class="inventory-header">
+                                <h3>Medicamento 2</h3>
+                                <span class="inventory-badge" id="med2Status">Disponible</span>
+                            </div>
+                            <div class="inventory-stats">
+                                <div class="inventory-value" id="med2Stock">100</div>
+                                <div class="inventory-label">Unidades disponibles</div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="med2Progress" style="width: 100%"></div>
+                            </div>
+                            <div class="inventory-percentage" id="med2StockPercentage">100% en stock</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Section -->
+                <div class="form-container">
+                    <h2 class="section-title">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Registrar Paciente
+                    </h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Presión Sistólica (mmHg)</label>
+                            <input type="number" id="systolicBP" placeholder="Ej: 120" min="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Presión Diastólica (mmHg)</label>
+                            <input type="number" id="diastolicBP" placeholder="Ej: 80" min="0">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="addPatient()">Agregar Paciente</button>
+                        <button class="btn-secondary" onclick="resetSystem()">Reiniciar Sistema</button>
+                    </div>
+                </div>
+
+                <!-- Alert for unclassified values -->
+                <div id="warningAlert" class="warning-alert" style="display: none;">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div>
+                        <h3>Valores no clasificados</h3>
+                        <p>Los valores ingresados no están dentro de los rangos establecidos en la tabla de clasificación del Ministerio de Salud.</p>
+                    </div>
+                </div>
+                <div class="reference-table-section">
+                    <h2 class="section-title">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                        Tabla de Referencia - Clasificación de Presión Arterial
+                    </h2>
+                    <div class="table-container">
+                        <table class="reference-table">
+                            <thead>
+                                <tr>
+                                    <th>Presión Sistólica</th>
+                                    <th>Presión Diastólica</th>
+                                    <th>Categoría</th>
+                                    <th>Tipo de Medicamento</th>
+                                    <th>Número de Dosis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>&lt; 69</td>
+                                    <td>&lt; 48</td>
+                                    <td><span class="badge badge-category">hipertensión</span></td>
+                                    <td>Medicamento 2</td>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <td>[69 - 98]</td>
+                                    <td>[48 - 66]</td>
+                                    <td><span class="badge badge-category">Optima</span></td>
+                                    <td>Ninguno</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>[98 - 143]</td>
+                                    <td>[66 - 92]</td>
+                                    <td><span class="badge badge-category">Común</span></td>
+                                    <td>Ninguno</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>[143 - 177]</td>
+                                    <td>[92 - 124]</td>
+                                    <td><span class="badge badge-category">Pre HTA</span></td>
+                                    <td>Medicamento 1</td>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <td>[177 - 198]</td>
+                                    <td>[124 - 142]</td>
+                                    <td><span class="badge badge-category">HTAG1</span></td>
+                                    <td>Medicamento 1</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td>[198 - 246]</td>
+                                    <td>[142 - 169]</td>
+                                    <td><span class="badge badge-category">HTAG2</span></td>
+                                    <td>Medicamento 1</td>
+                                    <td>18</td>
+                                </tr>
+                                <tr>
+                                    <td>≥ 246</td>
+                                    <td>≥ 169</td>
+                                    <td><span class="badge badge-category">HTAG3</span></td>
+                                    <td>Medicamento 1</td>
+                                    <td>35</td>
+                                </tr>
+                                <tr>
+                                    <td>≥ 162</td>
+                                    <td>&lt; 86</td>
+                                    <td><span class="badge badge-category">HTASS</span></td>
+                                    <td>Medicamento 1</td>
+                                    <td>17</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Results Section -->
+                <div id="resultsSection" class="results-section" style="display: none;">
+                    <h2 class="section-title">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                        Resultados del Sistema
+                    </h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                </svg>
+                            </div>
+                            <div class="stat-label">Total de Pacientes</div>
+                            <div class="stat-value" id="totalPatients">0</div>
+                            <div class="stat-sublabel">Atendidos</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <div class="stat-label">Pacientes con Medicamento 1</div>
+                            <div class="stat-value" id="med1Patients">0</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <div class="stat-label">Pacientes con Medicamento 2</div>
+                            <div class="stat-value" id="med2Patients">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patients Table -->
+                <div id="tableSection" style="display: none;">
+                    <h2 class="section-title">Pacientes Registrados</h2>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Presión Sistólica</th>
+                                    <th>Presión Diastólica</th>
+                                    <th>Categoría</th>
+                                    <th>Medicamento</th>
+                                    <th>Dosis</th>
+                                </tr>
+                            </thead>
+                            <tbody id="patientsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Info Alert -->
+                <div id="infoAlert" class="info-alert">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <div>
+                        <h3>Sistema Listo</h3>
+                        <p>Ingrese los datos de presión arterial de los pacientes para comenzar a categorizar y asignar medicamentos según los protocolos del Ministerio de Salud.</p>
+                    </div>
+                </div>
+    <script src="script.js"></script>
+</body>
+</html>
