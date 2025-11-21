@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Entrega de Medicamentos - Ministerio de Salud</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-content">
+                    <svg class="icon-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    <div>
+                        <h1>Sistema de Entrega de Medicamentos</h1>
+                        <p class="subtitle">Ministerio de Salud - Control de Enfermedades no Transmisibles</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <!-- Form Section -->
+                <div class="form-container">
+                    <h2 class="section-title">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Registrar Paciente
+                    </h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Presión Sistólica (mmHg)</label>
+                            <input type="number" id="systolicBP" placeholder="Ej: 120">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Presión Diastólica (mmHg)</label>
+                            <input type="number" id="diastolicBP" placeholder="Ej: 80">
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="addPatient()">Agregar Paciente</button>
+                        <button class="btn-secondary" onclick="resetSystem()">Reiniciar</button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="results-section" style="display: none;">
+                    <h2 class="section-title">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                        Resultados del Sistema
+                    </h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card stat-blue">
+                            <div class="stat-label">Total de Pacientes</div>
+                            <div class="stat-value" id="totalPatients">0</div>
+                            <div class="stat-sublabel">Atendidos</div>
+                        </div>
+                        
+                        <div class="stat-card stat-green">
+                            <div class="stat-label">Medicamento 1</div>
+                            <div class="stat-value" id="med1Patients">0</div>
+                            <div class="stat-sublabel" id="med1Percentage">(0.00%)</div>
+                        </div>
+                        
+                        <div class="stat-card stat-purple">
+                            <div class="stat-label">Medicamento 2</div>
+                            <div class="stat-value" id="med2Patients">0</div>
+                            <div class="stat-sublabel" id="med2Percentage">(0.00%)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patients Table -->
+                <div id="tableSection" style="display: none;">
+                    <h2 class="section-title">Pacientes Registrados</h2>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Presión Sistólica</th>
+                                    <th>Presión Diastólica</th>
+                                    <th>Categoría</th>
+                                    <th>Medicamento</th>
+                                    <th>Dosis</th>
+                                </tr>
+                            </thead>
+                            <tbody id="patientsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Info Alert -->
+                <div id="infoAlert" class="info-alert">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <div>
+                        <h3>Sistema Listo</h3>
+                        <p>Ingrese los datos de presión arterial de los pacientes para comenzar a categorizar y asignar medicamentos según los protocolos del Ministerio de Salud.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
