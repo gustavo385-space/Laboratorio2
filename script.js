@@ -6,46 +6,49 @@ function categorizePatient(systolic, diastolic) {
     const s = parseInt(systolic);
     const d = parseInt(diastolic);
 
+    // Validar rangos específicos según la tabla
+    
     // Hipertensión (presión muy baja)
-    if (s < 69 || d < 48) {
+    if (s < 69 && d < 48) {
         return { category: 'hipertensión', type: 2, doses: 6 };
     }
     
-    // Óptima
+    // Óptima [69-98] y [48-66]
     if (s >= 69 && s <= 98 && d >= 48 && d <= 66) {
         return { category: 'Optima', type: 0, doses: 0 };
     }
     
-    // Común
-    if (s >= 98 && s <= 143 && d >= 66 && d <= 92) {
+    // Común [98-143] y [66-92]
+    if (s > 98 && s <= 143 && d > 66 && d <= 92) {
         return { category: 'Común', type: 0, doses: 0 };
     }
     
-    // Pre HTA
-    if (s >= 143 && s <= 177 && d >= 92 && d <= 124) {
+    // Pre HTA [143-177] y [92-124]
+    if (s > 143 && s <= 177 && d > 92 && d <= 124) {
         return { category: 'Pre HTA', type: 1, doses: 6 };
     }
     
-    // HTAG1
-    if (s >= 177 && s <= 198 && d >= 124 && d <= 142) {
+    // HTAG1 [177-198] y [124-142]
+    if (s > 177 && s <= 198 && d > 124 && d <= 142) {
         return { category: 'HTAG1', type: 1, doses: 10 };
     }
     
-    // HTAG2
-    if (s >= 198 && s <= 246 && d >= 142 && d <= 169) {
+    // HTAG2 [198-246] y [142-169]
+    if (s > 198 && s <= 246 && d > 142 && d <= 169) {
         return { category: 'HTAG2', type: 1, doses: 18 };
     }
     
-    // HTAG3
-    if (s >= 246 || d >= 169) {
+    // HTAG3 >= 246 o >= 169
+    if (s > 246 || d > 169) {
         return { category: 'HTAG3', type: 1, doses: 35 };
     }
     
-    // HTASS
+    // HTASS >= 162 y < 86
     if (s >= 162 && d < 86) {
         return { category: 'HTASS', type: 1, doses: 17 };
     }
     
+    // Si no coincide con ningún rango, retornar null
     return null;
 }
 
@@ -60,13 +63,23 @@ function addPatient() {
         return;
     }
 
+    // Validar que sean números positivos
+    if (parseInt(systolicBP) < 0 || parseInt(diastolicBP) < 0) {
+        alert('Los valores de presión arterial deben ser positivos');
+        return;
+    }
+
     // Categorizar paciente
     const patientData = categorizePatient(systolicBP, diastolicBP);
 
+    // Mostrar alerta si los valores no están clasificados
     if (!patientData) {
-        alert('No se encontró la categoría del paciente en el registro.');
+        showWarningAlert();
         return;
     }
+
+    // Ocultar alerta de advertencia si estaba visible
+    hideWarningAlert();
 
     // Agregar paciente al array
     const newPatient = {
@@ -92,6 +105,25 @@ function addPatient() {
     document.getElementById('infoAlert').style.display = 'none';
 }
 
+// Función para mostrar alerta de advertencia
+function showWarningAlert() {
+    const warningAlert = document.getElementById('warningAlert');
+    warningAlert.style.display = 'flex';
+    
+    // Scroll suave hacia la alerta
+    warningAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    // Auto-ocultar después de 5 segundos
+    setTimeout(() => {
+        hideWarningAlert();
+    }, 5000);
+}
+
+// Función para ocultar alerta de advertencia
+function hideWarningAlert() {
+    document.getElementById('warningAlert').style.display = 'none';
+}
+
 // Función para calcular y actualizar resultados
 function updateResults() {
     const totalPatients = patients.length;
@@ -102,7 +134,7 @@ function updateResults() {
     // Contar pacientes que reciben medicamento 2 (solo type 2)
     const med2Patients = patients.filter(p => p.type === 2).length;
     
-    // Calcular porcentajes
+    // Calcular porcentajes con 2 decimales
     const med1Percentage = totalPatients > 0 ? ((med1Patients / totalPatients) * 100).toFixed(2) : '0.00';
     const med2Percentage = totalPatients > 0 ? ((med2Patients / totalPatients) * 100).toFixed(2) : '0.00';
 
@@ -165,12 +197,20 @@ function updateTable() {
 
 // Función para reiniciar el sistema
 function resetSystem() {
+    if (patients.length > 0) {
+        const confirmReset = confirm('¿Está seguro que desea reiniciar el sistema? Se perderán todos los datos registrados.');
+        if (!confirmReset) {
+            return;
+        }
+    }
+    
     patients = [];
     document.getElementById('systolicBP').value = '';
     document.getElementById('diastolicBP').value = '';
     document.getElementById('resultsSection').style.display = 'none';
     document.getElementById('tableSection').style.display = 'none';
     document.getElementById('infoAlert').style.display = 'flex';
+    document.getElementById('warningAlert').style.display = 'none';
     document.getElementById('patientsTableBody').innerHTML = '';
 }
 

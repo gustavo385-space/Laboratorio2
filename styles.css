@@ -6,28 +6,30 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
     min-height: 100vh;
     padding: 2rem;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
 .card {
     background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    border: 1px solid #e0e0e0;
 }
 
 /* Header Styles */
 .header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
     color: white;
     padding: 2rem;
+    border-bottom: 4px solid #0d47a1;
 }
 
 .header-content {
@@ -39,10 +41,11 @@ body {
 .header h1 {
     font-size: 2rem;
     margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .subtitle {
-    opacity: 0.9;
+    opacity: 0.95;
     font-size: 0.95rem;
 }
 
@@ -64,20 +67,23 @@ body {
 }
 
 .section-title {
-    font-size: 1.5rem;
-    color: #1f2937;
+    font-size: 1.4rem;
+    color: #0d47a1;
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-weight: 600;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #64b5f6;
 }
 
 /* Form Styles */
 .form-container {
-    background: linear-gradient(135deg, #f3f4f6 0%, #e0e7ff 100%);
+    background: #f5f5f5;
     padding: 2rem;
-    border-radius: 15px;
-    border: 2px solid #818cf8;
+    border-radius: 8px;
+    border: 2px solid #90caf9;
     margin-bottom: 2rem;
 }
 
@@ -91,24 +97,25 @@ body {
 .form-group label {
     display: block;
     font-weight: 600;
-    color: #374151;
+    color: #1565c0;
     margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 
 .form-group input {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 2px solid #d1d5db;
-    border-radius: 10px;
+    border: 2px solid #90caf9;
+    border-radius: 6px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    background: white;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #1565c0;
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.1);
 }
 
 /* Button Styles */
@@ -118,9 +125,9 @@ body {
 }
 
 .btn-primary, .btn-secondary {
-    padding: 0.75rem 1.5rem;
+    padding: 0.85rem 1.75rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 6px;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
@@ -128,25 +135,77 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
     color: white;
     flex: 1;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
 }
 
 .btn-primary:hover {
+    background: linear-gradient(135deg, #0d47a1 0%, #01579b 100%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 6px 16px rgba(21, 101, 192, 0.4);
 }
 
 .btn-secondary {
-    background: #6b7280;
+    background: #424242;
     color: white;
-    box-shadow: 0 4px 15px rgba(107, 114, 128, 0.4);
+    box-shadow: 0 4px 12px rgba(66, 66, 66, 0.3);
 }
 
 .btn-secondary:hover {
-    background: #4b5563;
+    background: #212121;
+    transform: translateY(-2px);
+}
+
+/* Warning Alert */
+.warning-alert {
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+    padding: 1.5rem;
+    border-radius: 6px;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
+}
+
+.warning-alert svg {
+    color: #f57c00;
+    flex-shrink: 0;
+}
+
+.warning-alert h3 {
+    color: #e65100;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.warning-alert p {
+    color: #ef6c00;
+    line-height: 1.6;
+}
+
+/* Reference Table Section */
+.reference-table-section {
+    background: #fafafa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid #e0e0e0;
+}
+
+.reference-table {
+    font-size: 0.95rem;
+}
+
+.reference-table thead {
+    background: linear-gradient(135deg, #424242 0%, #212121 100%);
+}
+
+.reference-table tbody tr:hover {
+    background: #e3f2fd;
 }
 
 /* Results Section */
@@ -156,61 +215,77 @@ body {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
 .stat-card {
-    padding: 1.5rem;
-    border-radius: 15px;
-    color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 1.75rem;
+    border-radius: 8px;
+    background: white;
+    border: 2px solid #90caf9;
+    box-shadow: 0 2px 12px rgba(21, 101, 192, 0.15);
+    transition: all 0.3s ease;
 }
 
-.stat-blue {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(21, 101, 192, 0.25);
 }
 
-.stat-green {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    background: #e3f2fd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
-.stat-purple {
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+.stat-icon svg {
+    width: 28px;
+    height: 28px;
+    color: #1565c0;
 }
 
 .stat-label {
     font-size: 0.9rem;
-    opacity: 0.9;
+    color: #616161;
     margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .stat-value {
     font-size: 2.5rem;
     font-weight: bold;
+    color: #0d47a1;
 }
 
 .stat-sublabel {
     font-size: 0.85rem;
-    opacity: 0.9;
+    color: #757575;
     margin-top: 0.5rem;
 }
 
 /* Table Styles */
 .table-container {
     overflow-x: auto;
-    border-radius: 15px;
-    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
     margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    background: white;
 }
 
 thead {
-    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    background: linear-gradient(135deg, #424242 0%, #212121 100%);
     color: white;
 }
 
@@ -221,68 +296,87 @@ th, td {
 
 th {
     font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
 }
 
 tbody tr:nth-child(even) {
-    background: #f9fafb;
+    background: #fafafa;
 }
 
 tbody tr:hover {
-    background: #f3f4f6;
+    background: #e3f2fd;
+    transition: background 0.2s ease;
+}
+
+td {
+    color: #424242;
 }
 
 /* Category Badge */
 .badge {
-    padding: 0.4rem 0.8rem;
+    padding: 0.4rem 0.9rem;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 600;
     display: inline-block;
 }
 
+.badge-category {
+    background: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #90caf9;
+}
+
 .badge-red {
-    background: #fee2e2;
-    color: #991b1b;
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
 }
 
 .badge-yellow {
-    background: #fef3c7;
-    color: #92400e;
+    background: #fff9c4;
+    color: #f57f17;
+    border: 1px solid #fff176;
 }
 
 .badge-orange {
-    background: #fed7aa;
-    color: #9a3412;
+    background: #ffe0b2;
+    color: #e65100;
+    border: 1px solid #ffcc80;
 }
 
 .badge-green {
-    background: #d1fae5;
-    color: #065f46;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
 }
 
 /* Info Alert */
 .info-alert {
-    background: #dbeafe;
-    border-left: 4px solid #3b82f6;
+    background: #e3f2fd;
+    border-left: 4px solid #1976d2;
     padding: 1.5rem;
-    border-radius: 10px;
+    border-radius: 6px;
     display: flex;
     gap: 1rem;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);
 }
 
 .info-alert svg {
-    color: #3b82f6;
+    color: #1565c0;
     flex-shrink: 0;
 }
 
 .info-alert h3 {
-    color: #1e3a8a;
+    color: #0d47a1;
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .info-alert p {
-    color: #1e40af;
+    color: #1565c0;
     line-height: 1.6;
 }
 
@@ -311,5 +405,9 @@ tbody tr:hover {
     th, td {
         padding: 0.75rem;
         font-size: 0.9rem;
+    }
+
+    .content {
+        padding: 1rem;
     }
 }
